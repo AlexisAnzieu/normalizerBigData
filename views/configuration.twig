@@ -1,0 +1,48 @@
+{% extends 'layout.twig' %}
+{% block title %} Index {% endblock %}
+
+	{% block body %}
+
+		<div class="row">
+
+			<h4>Elasticsearch</h4>
+
+			<form class="col s12" action="/api/updateConfig" id="formulaireElastic" method="POST">
+				<div class="row">
+
+					{% for key, param in doc %}
+						<div class="input-field col s6 m4 l3">
+							<input value="{{ param }}" name="{{ key }}" id="{{ key }}-id" type="text" class="validate">
+							<label for="{{ key }}-id">{{ key }}</label>
+						</div>
+
+					{% endfor %}
+
+					<div class="input-field col s12">
+						<button class="btn waves-effect waves-light" type="submit">Enregistrer
+							<i class="material-icons left">save</i>
+						</button>
+					</div>
+
+
+				</div>
+
+
+			</form>
+
+
+		</div>
+
+	{% endblock %}
+
+	{% block js %}
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#Contact-Form").submit(function(e) {
+					e.preventDefault();
+				});
+			});
+		</script>
+
+	{% endblock %}
+

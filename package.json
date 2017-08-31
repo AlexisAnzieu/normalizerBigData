@@ -1,0 +1,22 @@
+{
+  "name": "agentelk",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www -w ./"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "~1.17.1",
+    "colors": "^1.1.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "jquery": "^3.2.1",
+    "js-yaml": "^3.9.1",
+    "materialize-css": "^0.100.1",
+    "morgan": "~1.8.1",
+    "serve-favicon": "~2.4.2",
+    "twig": "~0.10.3"
+  }
+}
