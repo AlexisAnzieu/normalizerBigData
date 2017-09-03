@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/AlexisAnzieu/normalizerBigData.svg?branch=master)](https://travis-ci.org/AlexisAnzieu/normalizerBigData)
+
 # normalizerBigData
 Cet interface web permet de normer son environnement Big Data avec des bonnes pratiques universelles. 
 
