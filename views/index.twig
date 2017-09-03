@@ -24,22 +24,26 @@
 							<td>Mémoire</td>
 							<td>{{global.ram.note}} / {{global.total.memoire}}</td>
 						</tr>
+						<tr>
+							<td>Randomness</td>
+							<td>{{global.random.note}} / {{global.total.random}}</td>
+						</tr>
 					</tbody>
 				</table>
 
 			</div>
 
 			<div class="col s12 m5" >
-				<div style="color:white;border-radius:5px" class="container center 
+				<div style="color:white;border-radius:5px;margin-top:70px" class="container center 
 
-				{% if global.java.note + global.ram.note < global.total.somme / 2 %} red
-				{% elseif global.java.note + global.ram.note < global.total.somme  %} orange
+				{% if global.result < global.total.somme / 2 %} red
+				{% elseif global.result < global.total.somme  %} orange
 				{% else %} green
 				{% endif %}
 
 				lighten-2">
 
-				<h3>Note : {{global.java.note + global.ram.note}} / {{global.total.somme}} </h3>
+				<h3>Note : {{global.result}} / {{global.total.somme}} </h3>
 
 			</div>
 		</div>
@@ -84,20 +88,45 @@
 </div>
 
 <div class="col s12">
+
 	<div class="col s12 m6">
 
-		<div class="card green">
+		<div class="card 
 
-			<div class="card-content white-text">
-				<span class="card-title"><u>Fichiers </u> </span>
-				{% for file in global.fileList %}
-					{{file}}<br>
-				{% endfor %}
+		{% if global.random.note == 10 %} green
+		{% elseif global.random.note > 5 %} orange
+		{% else %} red lighten-2 
+		{% endif %}">
 
-			</div>
+		<div class="card-content white-text">
+			<span class="card-title"><u>Séquence aléatoire</u> ( {{global.constant.RANDOMNESS}} requises )</span>
+			{% if global.random.data == "windows" %}
+				<p>Les systèmes Windows prennent en charge la génération des séquences aléatoires</p>
+			{% elseif global.random.note > 5 %}
+				<p>Il y a suffisamment de génération de séquences aléatoire {{ global.random.data }}.</p>
+			{% else %}
+				<p>Il n'y a pas assez de génération de séquences aléatoire {{ global.random.data }}.</p>				
+			{% endif %}
+		</div>
+
+	</div>
+</div>
+
+
+<div class="col s12 m6">
+
+	<div class="card green">
+
+		<div class="card-content white-text">
+			<span class="card-title"><u>Fichiers </u> </span>
+			{% for file in global.fileList %}
+				{{file}}<br>
+			{% endfor %}
 
 		</div>
+
 	</div>
+</div>
 
 </div>
 

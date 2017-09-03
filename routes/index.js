@@ -8,8 +8,9 @@ var {exec} = require('child_process');
 const ROOT = ".";
 const REQUIRED_MEMORY = 2; 
 const JAVA_VERSION = 8;
+const RANDOMNESS = 1000;
 
-const constant = {ROOT,REQUIRED_MEMORY,JAVA_VERSION}; 
+const constant = {ROOT,REQUIRED_MEMORY,JAVA_VERSION,RANDOMNESS}; 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -17,7 +18,7 @@ router.get('/', function(req, res, next) {
 	var global={}; 
 
 	global.constant = constant; 
-	global.total = {"java":20,"memoire":15,"somme":35}; 
+	global.total = {"java":20,"memoire":15,"random":10,"somme":45}; 
 
 	User('java -version')
 	.then(java=>{ 
@@ -32,6 +33,13 @@ router.get('/', function(req, res, next) {
 	})
 	.then( ram=>{
 		global.ram = ram; 
+		return checkRandom(ram.osType); 
+
+	})
+	.then( random=>{
+		global.random = random; 
+
+		global.result = global.java.note + global.ram.note + global.random.note
 
 		res.render('index', { global });	
 
@@ -128,6 +136,33 @@ function checkFiles(){
 
 				resolve(fileList); 
 			})
+
+		}); 
+}
+
+
+function checkRandom(osType){
+
+	return new Promise(
+
+		function (resolve, reject) {
+
+
+			if (osType.indexOf("win") !== -1){
+				resolve({"data":"windows","note":10}); 
+			}else{
+				fs.readFile('/proc/sys/kernel/random/entropy_avail', 'utf8', function (err,data) {
+					if (err) {
+						reject(err);
+					}
+
+					if (data>1000) resolve({data,"note":10}) 
+					else resolve({data,"note":data/100}) 
+
+				});
+			}
+
+
 
 		}); 
 }

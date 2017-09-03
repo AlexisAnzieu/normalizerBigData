@@ -19,7 +19,7 @@ Cet interface web permet de normer son environnement Big Data avec des bonnes pr
 ### Norme-OS ###
 [x] Existence de Java 8  
 [x] Mémoire vive disponible  
-[ ] Optimisation de l'aléatoire  
+[x] Optimisation de l'aléatoire  
 
 ### Norme-Outil ###
 
