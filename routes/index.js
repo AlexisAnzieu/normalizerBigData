@@ -17,6 +17,7 @@ router.get('/', function(req, res, next) {
 	var global={}; 
 
 	global.constant = constant; 
+	global.total = {"java":20,"memoire":15,"somme":35}; 
 
 	User('java -version')
 	.then(java=>{ 
@@ -62,14 +63,18 @@ function checkRAM(){
 
 			if (total<REQUIRED_MEMORY){ 
 				console.log(colors.red("You only get",total,"Gbs on this machine (minimum :",REQUIRED_MEMORY,"Gb)"));
+				resolve({osType,total,free,"note":0}); 
 
 			}else if (free<REQUIRED_MEMORY){
 				console.log(colors.yellow("WARNING : You only get",free,"Gbs free available, your will have a poor experience (minimum :",REQUIRED_MEMORY,"Gb)")); 
+				resolve({osType,total,free,"note":7}); 
+
 			}else{
 				console.log(colors.green("Enough RAM"));
+				resolve({osType,total,free,"note":15}); 
 			}
 
-			resolve({osType,total,free}); 		
+
 
 		}); 
 
@@ -86,7 +91,7 @@ function User(cmd) {
 			exec(cmd, function (error, stdout,stderr) {
 				if (error) {
 					console.error(colors.red("Java is not installed"));
-					resolve(-1); 
+					resolve({"note":0}); 
 				}
 				data = stderr.toString().split('\n')[0];
 				let javaVersionTmp = new RegExp('java version').test(data) ? data.toString().split(' ')[2].replace(/"/g, '') : false;
@@ -94,11 +99,12 @@ function User(cmd) {
 
 				if (javaVersion>=JAVA_VERSION){
 					console.log(colors.green("Java is correctly intalled"));
+					resolve({javaVersion,"note":20}); 
 				}else{
 					console.log(colors.red("Java version ",javaVersion,"is not supported (minimum : Java ",JAVA_VERSION,")"));
+					resolve({javaVersion,"note":0}); 
 				}
 
-				resolve(javaVersion); 
 			});
 
 		});

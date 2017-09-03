@@ -4,11 +4,53 @@
 	{% block body %}
 
 		<div class="row">
+
+			<div class="col s12 m7">
+
+				<table class="centered striped">
+					<thead>
+						<tr>
+							<th>Norme</th>
+							<th>Note</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td>Java</td>
+							<td>{{global.java.note}} / {{global.total.java}}</td>
+						</tr>
+						<tr>
+							<td>Mémoire</td>
+							<td>{{global.ram.note}} / {{global.total.memoire}}</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+
+			<div class="col s12 m5" >
+				<div style="color:white;border-radius:5px" class="container center 
+
+				{% if global.java.note + global.ram.note < global.total.somme / 2 %} red
+				{% elseif global.java.note + global.ram.note < global.total.somme  %} orange
+				{% else %} green
+				{% endif %}
+
+				lighten-2">
+
+				<h3>Note : {{global.java.note + global.ram.note}} / {{global.total.somme}} </h3>
+
+			</div>
+		</div>
+
+		<div class="col s12">
+
 			<div class="col s12 m6">
 				<div class="card 
 
-				{% if global.ram.free > global.constant.REQUIRED_MEMORY %} green
-				{% elseif global.ram.total > global.constant.REQUIRED_MEMORY %} orange
+				{% if global.ram.note == 15 %} green
+				{% elseif global.ram.note == 7 %} orange
 				{% else %} red lighten-2 
 				{% endif %}">
 
@@ -23,15 +65,14 @@
 		<div class="col s12 m6">
 
 			<div class="card 
-			{% if global.java == 8 %} green
-			{% elseif global.java == -1 %} red lighten-2
-			{% else %} orange 
+			{% if global.java.note == 20 %} green
+			{% elseif global.java.note == 0 %} red lighten-2
 			{% endif %}">
 
 			<div class="card-content white-text">
 				<span class="card-title"><u>Java</u> ( version {{global.constant.JAVA_VERSION}} requise )</span>
-				{% if global.java != -1 %}
-					<p>La version actuellement installée est la version {{ global.java }}.</p>
+				{% if global.java.javaVersion %}
+					<p>La version actuellement installée est la version {{ global.java.javaVersion }}.</p>
 				{% else %}
 					<p>Aucune instance de java n'est actuellement installée.</p>
 				{% endif %}
@@ -39,6 +80,10 @@
 
 		</div>
 	</div>
+
+</div>
+
+<div class="col s12">
 	<div class="col s12 m6">
 
 		<div class="card green">
@@ -47,12 +92,14 @@
 				<span class="card-title"><u>Fichiers </u> </span>
 				{% for file in global.fileList %}
 					{{file}}<br>
-			{% endfor %}
+				{% endfor %}
 
 			</div>
 
 		</div>
 	</div>
+
+</div>
 
 </div>
 

@@ -12,10 +12,22 @@ Cet interface web permet de normer son environnement Big Data avec des bonnes pr
 
 ## Implémentation des fonctionnalités à venir ##
 
+### Utilisateur ###
+
+[x] Modification des fichiers de configuration 
+
+### Norme-OS ###
 [x] Existence de Java 8  
 [x] Mémoire vive disponible  
-[x] Modification des fichiers de configuration    
+[ ] Optimisation de l'aléatoire  
+
+### Norme-Outil ###
+
 [ ] Arborescence des dossiers respectée  
 [ ] Vérification des liens symboliques  
 [ ] Boucle locale elasticsearch  
 [ ] Reverse proxy Kibana  
+[ ] Matrice de compatiblité  
+[ ] Snapshots  
+[ ] Backups  
+[ ] Restore / Relance
