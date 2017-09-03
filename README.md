@@ -12,6 +12,7 @@ Cet interface web permet de normer son environnement Big Data avec des bonnes pr
 
 [x] Existence de Java 8  
 [x] Mémoire vive disponible  
+[x] Modification des fichiers de configuration    
 [ ] Arborescence des dossiers respectée  
 [ ] Vérification des liens symboliques  
 [ ] Boucle locale elasticsearch  
