@@ -28,6 +28,10 @@
 							<td>Randomness</td>
 							<td>{{global.random.note}} / {{global.total.random}}</td>
 						</tr>
+						<tr>
+							<td>Arborescence</td>
+							<td>{{global.files.note}} / {{global.total.files}}</td>
+						</tr>
 					</tbody>
 				</table>
 
@@ -115,21 +119,111 @@
 
 <div class="col s12 m6">
 
-	<div class="card green">
+	<div class="card 
 
-		<div class="card-content white-text">
-			<span class="card-title"><u>Fichiers </u> </span>
-			{% for file in global.fileList %}
-				{{file}}<br>
-			{% endfor %}
+	{% if global.files.note == 5 %} green
+	{% elseif global.files.note >= 2 %} orange
+	{% else %} red lighten-2 
+	{% endif %}">
 
-		</div>
+	<div class="card-content white-text">
+		<span class="card-title"><u>Fichiers </u> </span>
+
+		{{ global.files.message }}
 
 	</div>
+
+</div>
 </div>
 
 </div>
 
 </div>
+
+{% endblock %}
+
+
+{% block js %}
+
+	{{ parent()}}
+
+	<script type="text/javascript">
+
+
+	$(document).ready(function(){
+
+		var elastic = document.getElementById('elasticsearch'); 
+		var logstash = document.getElementById('logstash'); 
+		var kibana = document.getElementById('kibana'); 
+		var createDir = document.getElementById('createDir'); 
+
+		$('.tooltipped').tooltip({delay: 0});
+
+
+		var downloadStack = function(e){
+
+			var stackName = this.id; 
+
+			$.ajax({
+				'method':'get',
+				'url':'/api/downloadStack?stack='+stackName,
+				'beforeSend':function(){
+					Materialize.toast("Déploiement de "+stackName+" en cours...", 10000, 'rounded') 					
+				},
+				'success':function(res){
+					if (res==0){
+						Materialize.toast(stackName+" a bien été déployé", 2000, 'rounded') 
+						setTimeout(function(){}, 2000);
+						location.reload(); 
+					}else{
+						Materialize.toast("Échec du déploiement de"+ stackName, 3000) 
+					}
+				}
+			})
+
+		}
+
+
+		var createDirFunction = function(){
+
+			console.log("ok")
+
+			$.ajax({
+				'method':'post',
+				'url':'/api/createDir',
+				'success':function(res){
+					if (res==0){
+						Materialize.toast(" Répertoire créé", 2000, 'rounded') 
+						setTimeout(function(){}, 2000);
+						location.reload(); 
+					}else{
+						Materialize.toast("Échec de création du répertoire", 3000) 
+					}
+				}
+			})
+
+		}; 
+
+
+		if (elastic) elastic.addEventListener('click',downloadStack); 
+		if (kibana) kibana.addEventListener('click',downloadStack); 
+		if (logstash) logstash.addEventListener('click',downloadStack);
+		if (createDir) createDir.addEventListener('click',createDirFunction)
+
+
+
+	});
+
+
+
+
+
+
+
+
+	</script>
+
+
+
 
 {% endblock %}

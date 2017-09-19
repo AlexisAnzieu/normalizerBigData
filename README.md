@@ -23,7 +23,7 @@ Cet interface web permet de normer son environnement Big Data avec des bonnes pr
 
 ### Norme-Outil ###
 
-- [ ] Arborescence des dossiers respectée  
+- [x] Arborescence des dossiers respectée  
 - [ ] Vérification des liens symboliques  
 - [ ] Boucle locale elasticsearch  
 - [ ] Reverse proxy Kibana  
