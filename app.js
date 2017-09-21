@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var twig = require('twig');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 var configuration = require('./routes/configuration');
 var api = require('./routes/api');
 
@@ -27,7 +26,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/config', configuration);
 app.use('/api', api);
 
