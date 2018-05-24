@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/AlexisAnzieu/normalizerBigData.svg?branch=master)](https://travis-ci.org/AlexisAnzieu/normalizerBigData)
 
 # normalizerBigData
-Ce projet a été mené dans le but de mettre en pratique mes théories écrites dans mon mémoire de Master 2 [normalisation d'un environnement d'analyse Big Data]
+Ce projet a été mené dans le but de mettre en pratique mes théories écrites dans mon mémoire de Master 2 [normalisation d'un environnement d'analyse Big Data](https://github.com/AlexisAnzieu/normalizerBigData/blob/master/normalisation%20d'un%20environnement%20d'analyse%20big%20Data.pdf)
 Cet interface web permet de normer son environnement Big Data avec des bonnes pratiques universelles. 
 
 ## Installation ##
